@@ -1,8 +1,22 @@
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="navbar navbar-expand-lg bg-white text-dark">
+  <div class="navbar container-navbar">
+
+    <div class="logo">
+      <a routerLink="/home">
+        <img src="/logo.png" alt="Logo">
+      </a>
+    </div>
+
+
+  <div class="INS">
+    <a routerLink="/inicio">INICIO</a>
+    <a routerLink="/nosotros">NOSOTROS</a>
+    <a routerLink="/sedes">SEDES</a>
   </div>
+
+
+  <div class="agendar">
+      <button (click)="goToLogin()">AGENDAR</button>
+  </div>
+</div>
 </div>
