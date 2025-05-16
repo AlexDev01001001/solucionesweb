@@ -1,0 +1,24 @@
+.carrusel {
+  width: 98%;
+  overflow: hidden;
+    margin: 0 auto; 
+}
+
+.image-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0; 
+  margin: 0;
+}
+
+.carousel-img {
+  width: calc((100% - 20px) / 3); 
+  height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.carousel-img:not(:last-child) {
+  margin-right: 30px;
+}
+
