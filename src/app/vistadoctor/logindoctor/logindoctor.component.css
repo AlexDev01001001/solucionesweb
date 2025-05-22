@@ -1,0 +1,35 @@
+body {
+  background-image: url('/fondo2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: auto;
+  height: 100vh;
+  opacity: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0
+
+}
+
+.login_class{
+  height: 400px;
+  width: 500px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.container_text_botones{
+    height: 100%;
+    width: fit-content;
+}
+
+.texto{
+  margin-top: 20px;
+}
