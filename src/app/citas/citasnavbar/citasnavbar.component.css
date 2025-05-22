@@ -1,0 +1,70 @@
+.container-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+  padding: 0 20px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+  margin-left: 10px;
+  cursor:pointer
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.INS {
+  display: flex;
+  justify-content: space-evenly; 
+  flex-grow: 1; 
+  gap: 150px;
+}
+
+.INS a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.INS a:hover {
+  background-color: #eee;
+  color: #007bff;
+}
+
+.INS a.active {
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+  color: #007bff;
+}
+
+
+.agendar button {
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+
+.agendar button:hover {
+  background-color: #333;
+}
+
+
