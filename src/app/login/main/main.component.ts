@@ -16,8 +16,8 @@ export class MainComponent {
     this.router.navigate(['/registro']);
   }
 
-    goToCitas(){
-    this.router.navigate(['/citas']);
+    goToList(){
+    this.router.navigate(['/list']);
   }
 
 }

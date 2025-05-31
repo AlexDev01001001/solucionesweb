@@ -1,0 +1,7 @@
+<ul class="list-group shadow-sm">
+  <li *ngFor="let mensaje of mensajes" class="list-group-item">
+    <strong>{{ mensaje.remitente }}:</strong>
+    <p class="mb-1">{{ mensaje.texto }}</p>
+    <small class="text-muted">{{ mensaje.fecha }}</small>
+  </li>
+</ul>

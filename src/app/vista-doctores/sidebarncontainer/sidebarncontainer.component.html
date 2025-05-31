@@ -1,0 +1,49 @@
+<div class="d-flex" style="min-height: 100vh;">
+  <!-- Sidebar -->
+  <nav class="bg-primary text-white flex-shrink-0 p-3" style="width: 280px;">
+    <h3 class="mb-4 text-center fw-bold">Panel Odontólogo</h3>
+    <ul class="nav nav-pills flex-column gap-2">
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center"
+          
+          [class.active]="activeSection==='citas'" 
+          (click)="setActive('citas')">
+          <i class="bi bi-calendar-check me-2 fs-5"></i> CITAS
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center"
+          [class.active]="activeSection==='pacientes'" 
+          (click)="setActive('pacientes')">
+          <i class="bi bi-people me-2 fs-5"></i> PACIENTES
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center"
+          
+          [class.active]="activeSection==='historias'" 
+          (click)="setActive('historias')">
+          <i class="bi bi-folder2-open me-2 fs-5"></i> HISTORIAS CLÍNICAS
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center"
+          
+          [class.active]="activeSection==='mensajes'" 
+          (click)="setActive('mensajes')">
+          <i class="bi bi-chat-left-text me-2 fs-5"></i> MENSAJES
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Contenido Principal -->
+  <main class="flex-grow-1 p-4 bg-light overflow-auto">
+    <h2 class="mb-4 border-bottom pb-2">{{ getSectionTitle() }}</h2>
+
+    <app-citas *ngIf="activeSection === 'citas'"></app-citas>
+    <app-pacientes *ngIf="activeSection === 'pacientes'"></app-pacientes>
+    <app-historias *ngIf="activeSection === 'historias'"></app-historias>
+    <app-mensajes *ngIf="activeSection === 'mensajes'"></app-mensajes>
+  </main>
+</div>

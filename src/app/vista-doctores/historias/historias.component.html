@@ -1,0 +1,10 @@
+<div class="list-group shadow-sm">
+  <a *ngFor="let historia of historias" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h6 class="mb-1">{{ historia.paciente }}</h6>
+      <small>{{ historia.fecha }}</small>
+    </div>
+    <p class="mb-1 text-truncate">{{ historia.resumen }}</p>
+    <small class="text-muted">Última actualización: {{ historia.ultimaActualizacion }}</small>
+  </a>
+</div>
