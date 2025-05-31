@@ -19,9 +19,9 @@
                 </div>
 
                 <div class="last" style="display: flex;flex-direction: column; padding: 1;">
-                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Ingresar</button>
+                <button (click)="goToCitas()" type="btn btn-info" class="btn btn-primary" style="margin-top: 30px;">Ingresar</button>
                 <small style="margin-top: 20px;" >¿No tienes una cuenta?</small>
-                <button type="submit" class="btn btn-info" style="margin-top: 20px;">Registrarse</button>
+                <button (click)="goToRegister()" type="btn btn-info" class="btn btn-info" style="margin-top: 20px;" >Registrarse</button>
                 </div>
             </form>
         </div>
