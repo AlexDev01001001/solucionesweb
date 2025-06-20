@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-4" *ngIf="cita">
   <div class="table-responsive border rounded-4 shadow-lg overflow-hidden">
     <table class="table table-bordered mb-0">
       <thead class="table-light">
@@ -12,11 +12,14 @@
       </thead>
       <tbody>
         <tr>
-          <td>22/04/2025</td>
-          <td>Dr. Example</td>
-          <td>Primera Cita</td>
-          <td></td>
-          <td>S/. 50.00</td>
+          <td>
+            <span>{{ cita.fecha }}</span><br>
+            <small class="text-muted">{{ cita.hora.substring(0, 5) }}</small>
+          </td>
+          <td>{{ cita.odontologo }}</td>
+          <td>{{ cita.seguimiento }}</td>
+          <td>{{ cita.tratamiento }}</td>
+          <td>S/. {{ cita.precio || '---' }}</td>
         </tr>
       </tbody>
     </table>

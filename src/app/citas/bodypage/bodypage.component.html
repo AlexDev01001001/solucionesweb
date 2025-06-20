@@ -5,40 +5,51 @@
       <div class="col-md-6">
         <div class="mb-3 d-flex justify-content-between align-items-center">
           <div style="width: 70%;">
-            <label class="form-label">Elegir Odontólogo:</label>
-            <select class="form-select">
-              <option>Dr. Rojas Abdul</option>
-              <option>Dra. Martínez</option>
-            </select>
+          <label class="form-label">Elegir Odontólogo:</label>
+            <select
+            class="form-select"
+            [(ngModel)]="odontologoSeleccionadoNombreCompleto"
+            [ngModelOptions]="{ standalone: true }"
+            (change)="onOdontologoChange()"
+            >
+            <option *ngFor="let o of odontologos" [value]="o.nombres + ' ' + o.apellidos">
+              {{ o.nombres }} {{ o.apellidos }}
+            </option>
+          </select>
           </div>
-          <div class="form-check ms-3 mt-4">
-            <input type="checkbox" class="form-check-input" [formControl]="esPrimeraCita" id="primeraCita">
-            <label class="form-check-label text-danger" for="primeraCita">
-              ¿Es mi primera cita?
-            </label>
-          </div>
+          
         </div>
 
-        @if (!esPrimeraCita.value) {
+        
           <div class="mb-3" style="width: 70%;">
             <label class="form-label">Tipo de seguimiento</label>
-            <select class="form-select">
-              <option>Post operatorio</option>
-              <option>Control</option>
-            </select>
+            <select
+            class="form-select"
+            [(ngModel)]="seguimientoSeleccionado"
+            [ngModelOptions]="{ standalone: true }"
+            (change)="onSeguimientoChange()"
+            >
+            <option *ngFor="let s of seguimientos" [value]="s.descripcion">{{ s.descripcion }}</option>
+          </select>
           </div>
 
           <div class="mb-3" style="width: 70%;">
             <label class="form-label">Elegir tratamiento:</label>
-            <select class="form-select">
-              <option>Limpieza de rutina</option>
-              <option>Ortodoncia</option>
-            </select>
+            <select
+            class="form-select"
+            [(ngModel)]="tratamientoSeleccionado"
+            [ngModelOptions]="{ standalone: true }"
+            [disabled]="tratamientosFiltrados.length === 0"
+          >
+            <option *ngFor="let t of tratamientosFiltrados" [value]="t.tratamientoDescripcion">
+              {{ t.tratamientoDescripcion }}
+            </option>
+          </select>
           </div>
-        }
+        
 
         <div class="text-start">
-          <button type="submit" class="btn btn-info text-white">Programar cita</button>
+          <button type="button" class="btn btn-info text-white" (click)="enviarDatos();programarCita()">Programar cita</button>
         </div>
       </div>
 
@@ -46,14 +57,20 @@
       <div class="col-md-6" >
         <div class="mb-3">
           <label class="form-label" >Elegir Fecha:</label>
-          <input type="date" style="width: 70%;" class="form-control" [formControl]="fecha" />
+          <input type="date" style="width: 70%;" class="form-control" [formControl]="fecha" [min]="minDate" />
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Escoge horario:</label>
-          <select class="form-select" style="width: 70%;" [formControl]="hora">
-            <option>07:30</option>
-            <option>08:00</option>
+          <label class="form-label mt-3">Escoge horario:</label>
+            <select
+            class="form-select"
+            [(ngModel)]="horaSeleccionada"
+            [ngModelOptions]="{ standalone: true }"
+            [disabled]="horariosFiltrados.length === 0"
+          >
+            <option *ngFor="let h of horariosFiltrados" [value]="h.horaDisp">
+              {{ h.horaDisp.substring(0, 5)}}
+            </option>
           </select>
         </div>
 

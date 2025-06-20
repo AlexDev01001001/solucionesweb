@@ -1,32 +1,33 @@
-body {
+.contenedor_principal {
   background-image: url('/fondo.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
-  opacity: 80%;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login_class {
-  height: auto;
-  width: 500px;
-  background-color: rgb(255, 255, 255);
+  width: 100%;
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  padding: 30px;
 }
 
-.container_text_botones {
-  width: fit-content;
+.texto h4 {
+  color: #28a745;
 }
 
-.texto {
-  margin-top: 20px;
+.form-control {
+  border-radius: 10px;
+}
+
+.btn {
+  border-radius: 10px;
 }

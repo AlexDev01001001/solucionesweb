@@ -1,30 +1,44 @@
-<body>
-
+<div class="contenedor_principal">
   <div class="login_class">
     <div class="container_text_botones">
-        <div class="texto">
-            <h4><strong>¡SEPARA TU CITA YA!</strong></h4>
-        </div>
+      <div class="texto">
+        <h4><strong>¡SEPARA TU CITA YA!</strong></h4>
+      </div>
 
-        <div class="usuario_contraseña">
-            <form>
-                <div class="form-group" style="margin-top: 30px;">
-                <label for="exampleInputEmail1">Usuario</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" style = "width: 300px;">
-                </div>
+      <div class="usuario_contraseña">
+        <form (ngSubmit)="goToList()" #loginForm="ngForm">
+          <div class="form-group" style="margin-top: 30px;">
+            <label for="correo">Usuario</label>
+            <input
+              type="email"
+              class="form-control"
+              id="correo"
+              name="correo"
+              [(ngModel)]="correo"
+              required
+              style="width: 300px;"
+            />
+          </div>
 
-                <div class="form-group" style="margin-top: 20px;">
-                <label for="exampleInputPassword1">Contraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
-                </div>
+          <div class="form-group" style="margin-top: 20px;">
+            <label for="contraseña">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="contraseña"
+              name="contraseña"
+              [(ngModel)]="password"
+              required
+            />
+          </div>
 
-                <div class="last" style="display: flex;flex-direction: column; padding: 1;">
-                <button (click)="goToList()" type="btn btn-info" class="btn btn-primary" style="margin-top: 30px;">Ingresar</button>
-                <small style="margin-top: 20px;" >¿No tienes una cuenta?</small>
-                <button (click)="goToRegister()" type="btn btn-info" class="btn btn-info" style="margin-top: 20px;" >Registrarse</button>
-                </div>
-            </form>
-        </div>
+          <div class="last" style="display: flex; flex-direction: column; padding: 1;">
+            <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Ingresar</button>
+            <small style="margin-top: 20px;">¿No tienes una cuenta?</small>
+            <button type="button" class="btn btn-info" style="margin-top: 20px;" (click)="goToRegister()">Registrarse</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</body>
+</div>

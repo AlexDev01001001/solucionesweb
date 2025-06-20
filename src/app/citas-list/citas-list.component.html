@@ -1,5 +1,4 @@
 <app-citasnavbar></app-citasnavbar>
-
 <div class="container mt-5">
   <!-- Header -->
   <div class="d-flex justify-content-between align-items-center mb-4">
@@ -24,50 +23,36 @@
           <th>Acciones</th>
         </tr>
       </thead>
+      
       <tbody class="text-center">
-        <!-- Activa -->
-        <tr>
-          <td>#001</td>
-          <td>Dr. Rojas Abdul</td>
-          <td>Primera Cita</td>
-          <td>Limpieza de rutina</td>
-          <td>05/06/2025</td>
-          <td>07:30</td>
-          <td><span class="badge bg-success">Activa</span></td>
+        <tr *ngFor="let cita of citas">
+          <td>#{{ cita.idCita }}</td>
+          <td>{{ cita.odontologoNombre }}</td>
+          <td>{{ cita.seguimientoDescripcion || '-' }}</td>
+          <td>{{ cita.tratamientoDescripcion || '-' }}</td>
+          <td>{{ cita.fechaCita | date:'dd/MM/yyyy'  }}</td>
+          <td>{{ cita.hora.substring(0, 5) }}</td>
           <td>
+            <span [ngClass]="getClaseEstado(cita.estado)">
+              {{ getEstadoTexto(cita.estado) }}
+            </span>
+          </td>
+          <td>
+            <ng-container *ngIf="cita.estado === 1; else sinAcciones">
             <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editCitaModal">
               <i class="bi bi-pencil-square"></i> Editar
             </button>
             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelConfirmModal">
               <i class="bi bi-x-circle"></i> Cancelar
             </button>
+          </ng-container>
+          <ng-template #sinAcciones>
+            <!-- No mostrar nada si estado !== 1 -->
+  </ng-template>
           </td>
         </tr>
-
-        <!-- Finalizada -->
-        <tr>
-          <td>#002</td>
-          <td>Dr. Pérez García</td>
-          <td>Post operatorio</td>
-          <td>Extracción de muela</td>
-          <td>20/04/2025</td>
-          <td>10:00</td>
-          <td><span class="badge bg-warning text-dark">Finalizada</span></td>
-          <td>-</td>
-        </tr>
-
-        <!-- Cancelada -->
-        <tr>
-          <td>#003</td>
-          <td>Dr. Martínez Flores</td>
-          <td>Control</td>
-          <td>Revisión general</td>
-          <td>30/05/2025</td>
-          <td>08:30</td>
-          <td><span class="badge bg-danger">Cancelada</span></td>
-          <td>-</td>
-        </tr>
       </tbody>
+
     </table>
   </div>
 </div>
