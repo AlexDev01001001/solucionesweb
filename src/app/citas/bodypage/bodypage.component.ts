@@ -145,7 +145,7 @@ export class BodypageComponent implements OnInit {
     idConsultorio: 1,
     idAdmin: 1,
     idPaciente: this.obtenerIdPaciente(),
-    precioConsulta: tratamientoSeleccionadoObj?.precio || 0,
+    precioConsulta: Number((tratamientoSeleccionadoObj?.precio || 0).toFixed(2)),
     recordatorio: this.recordatorio.value
   };
 

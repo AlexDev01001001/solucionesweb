@@ -1,5 +1,5 @@
 export interface Odontologo {
-  idOdontologo?:number;
+  idOdontologo:number;
   nombres: string;
   apellidos: string;
 }

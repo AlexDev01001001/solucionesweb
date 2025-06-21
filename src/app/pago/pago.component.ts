@@ -5,6 +5,7 @@ import { CitaStateService } from '../com-services/cita-state.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UsuarioStateService } from '../services/paciente-usuario.service';
+import { CitaService } from '../services/cita-service.service';
 
 @Component({
   selector: 'app-pago',
@@ -21,58 +22,62 @@ export class PagoComponent implements OnInit{
   mostrandoConfirmacion = false;
   pagoExitoso = false;
   cita: any;
+  citaParaEnvio: any;
 
   constructor(private citaStateService:CitaStateService,private http:HttpClient,private router:Router, private usuarioState : UsuarioStateService){}
 
   ngOnInit(): void {
       this.citaStateService.getCitaObservable().subscribe(cita => {
         this.cita=cita;
+       this.citaParaEnvio = this.citaStateService.getCitaParaEnvioSnapshot();
+    console.log('Precio obtenido:', this.citaParaEnvio?.precioConsulta);  // <- De
+
+
       })
   }
 
-  pagar() {
-    if (this.nombre && this.numeroTarjeta && this.vencimiento && this.cvv) {
-      this.mostrandoConfirmacion = true;
-    } else {
-      alert('Por favor completa todos los campos.');
+    pagar() {
+        if (this.nombre && this.numeroTarjeta && this.vencimiento && this.cvv) {
+          const cita = this.citaStateService.getCitaParaEnvioSnapshot();
+
+          console.log('Cita para pago:', cita); 
+
+          if (!cita || cita.precioConsulta === undefined) {
+            alert('No se pudo obtener el precio de la cita.');
+            return;
+          }
+
+          this.citaParaEnvio = cita;
+          this.mostrandoConfirmacion = true;
+        } else {
+          alert('Por favor completa todos los campos.');
+        }
     }
+
+  confirmarPago() {
+  const citaCompleta = this.citaStateService.getCitaParaEnvioSnapshot();
+
+  if (!citaCompleta) {
+    alert('No hay datos de cita para registrar.');
+    return;
   }
 
-confirmarPago() {
-    const usuario = this.usuarioState.getUsuario();
-    if (!usuario || !this.cita) {
-      alert('Datos incompletos.');
-      return;
+  console.log('Registrando cita con DTO:', citaCompleta);
+
+  this.http.post('http://localhost:8080/api/pacientes/citas', citaCompleta).subscribe({
+    next: () => {
+      this.pagoExitoso = true;
+      this.mostrandoConfirmacion = false;
+      alert('Cita registrada correctamente.');
+      this.router.navigate(['/list']);
+      this.citaStateService.setCitaParaEnvio(null); // limpia los datos
+    },
+    error: (err) => {
+      console.error('Error al registrar cita:', err);
+      alert('Error al registrar la cita.');
     }
-
-    const citaDTO = {
-      fechaCita: this.cita.fecha,
-      hora: this.cita.hora,
-      idConsultorio: 1,
-      idAdmin: 1,
-      estado: 1,
-      idPaciente: usuario.idPaciente,
-      idOdontologo: this.cita.idOdontologo,
-      idSeguimiento: this.cita.idSeguimiento,
-      idTratamiento: this.cita.idTratamiento,
-      precioConsulta: this.cita.precio
-    };
-
-    console.log('Registrando cita con DTO:', citaDTO);
-
-    this.http.post('http://localhost:8080/api/pacientes/citas', citaDTO).subscribe({
-      next: () => {
-        this.pagoExitoso = true;
-        this.mostrandoConfirmacion = false;
-        alert('Cita registrada correctamente.');
-        this.router.navigate(['/list']); // o la ruta que prefieras
-      },
-      error: (err) => {
-        console.error('Error al registrar cita:', err);
-        alert('Error al registrar la cita.');
-      }
-    });
-  }
+  });
+}
 
   cancelarPago() {
     this.mostrandoConfirmacion = false;
