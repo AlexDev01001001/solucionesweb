@@ -42,9 +42,9 @@
             <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editCitaModal">
               <i class="bi bi-pencil-square"></i> Editar
             </button>
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelConfirmModal">
-              <i class="bi bi-x-circle"></i> Cancelar
-            </button>
+          <button class="btn btn-danger btn-sm" (click)="abrirModalCancelacion(cita.idCita)">
+            <i class="bi bi-x-circle"></i> Cancelar
+          </button>
           </ng-container>
           <ng-template #sinAcciones>
             <!-- No mostrar nada si estado !== 1 -->
@@ -115,7 +115,27 @@
 </div>
 
 <!-- Modal Confirmar Cancelación -->
-<div class="modal fade" id="cancelConfirmModal" tabindex="-1" aria-labelledby="cancelConfirmModalLabel" aria-hidden="true">
+
+<div class="modal-backdrop fade show" *ngIf="mostrarModalCancelar" style="z-index: 1040;"></div>
+
+<div class="modal fade show d-block" *ngIf="mostrarModalCancelar" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Cancelar Cita</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="cerrarModalCancelacion()"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p><strong>¿Estás seguro que deseas cancelar esta cita?</strong></p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button class="btn btn-secondary" (click)="cerrarModalCancelacion()">No</button>
+        <button class="btn btn-danger" (click)="cancelarCita()">Sí, Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--div class="modal fade" id="cancelConfirmModal" tabindex="-1" aria-labelledby="cancelConfirmModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
@@ -131,4 +151,4 @@
       </div>
     </div>
   </div>
-</div>
+</div-->

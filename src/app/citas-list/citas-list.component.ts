@@ -6,6 +6,7 @@ import { CitaService } from '../services/cita-service.service';
 import { UsuarioStateService } from '../services/paciente-usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-citas-list',
@@ -17,6 +18,8 @@ import { CommonModule } from '@angular/common';
 export class CitasListComponent implements OnInit{
 
   citas: CitaDetalleDTO[] = [];
+  mostrarModalCancelar = false;
+  idCitaAEliminar: number | null = null;
 
   constructor(private router:Router, private citaService:CitaService,private usuarioState: UsuarioStateService, private http:HttpClient){}
   
@@ -55,5 +58,33 @@ export class CitasListComponent implements OnInit{
     this.router.navigate(['/citas']);
   }
 
+  abrirModalCancelacion(id: number): void {
+    this.idCitaAEliminar = id;
+    this.mostrarModalCancelar = true;
+  }
 
+      cerrarModalCancelacion(): void {
+      this.mostrarModalCancelar = false;
+      this.idCitaAEliminar = null;
+    }
+
+    cancelarCita(): void {
+      if (this.idCitaAEliminar !== null) {
+        const url = `http://localhost:8080/api/pacientes/citas/${this.idCitaAEliminar}/cancelar`;
+
+        this.http.put(url, {}).subscribe({
+          next: () => {
+            
+            this.citas = this.citas.map(c =>
+              c.idCita === this.idCitaAEliminar ? { ...c, estado: 3 } : c
+            );
+            this.cerrarModalCancelacion();
+          },
+          error: err => {
+            console.error('Error al cancelar cita:', err);
+            alert('Ocurrió un error al cancelar la cita.');
+          }
+        });
+      }
+    }
 }
