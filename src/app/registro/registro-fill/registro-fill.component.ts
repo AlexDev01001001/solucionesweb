@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PacienteService } from '../../services/paciente-service.service';
 import { PacienteUsuario } from '../../Models/PacienteUsuario';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-registro-fill',
@@ -32,6 +33,8 @@ export class RegistroFillComponent {
     const fechaNacimientoDate = new Date(form.value.fechaNacimiento);
     const fechaNacimiento = fechaNacimientoDate.toISOString().split('T')[0]; // yyyy-MM-dd
 
+    const hashedPassword = CryptoJS.SHA256(form.value.password).toString();
+
 
     const paciente: PacienteUsuario = {
       nombres: form.value.nombre,
@@ -39,7 +42,7 @@ export class RegistroFillComponent {
       dni: form.value.dni,
       telefono: form.value.telefono,
       correo: form.value.email,
-      contraseña: form.value.password,
+      contraseña: hashedPassword,
       fechaNacimiento: fechaNacimiento,
       fechaRegistro: fechaRegistro
     };
