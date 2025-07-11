@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { UsuarioStateService } from '../services/paciente-usuario.service';
 import { CitaService } from '../services/cita-service.service';
 
+declare var Culqi: any;
+
 @Component({
   selector: 'app-pago',
   standalone: true,
@@ -14,6 +16,7 @@ import { CitaService } from '../services/cita-service.service';
   templateUrl: './pago.component.html',
   styleUrl: './pago.component.css'
 })
+
 export class PagoComponent implements OnInit{
   nombre = '';
   numeroTarjeta = '';
@@ -54,7 +57,7 @@ export class PagoComponent implements OnInit{
         }
     }
 
-  confirmarPago() {
+  /*confirmarPago() {
   const citaCompleta = this.citaStateService.getCitaParaEnvioSnapshot();
 
   if (!citaCompleta) {
@@ -75,6 +78,75 @@ export class PagoComponent implements OnInit{
     error: (err) => {
       console.error('Error al registrar cita:', err);
       alert('Error al registrar la cita.');
+    }
+  });
+}*/
+  confirmarPago() {
+  const citaCompleta = this.citaStateService.getCitaParaEnvioSnapshot();
+
+  if (!citaCompleta) {
+    alert('No hay datos de cita para registrar.');
+    return;
+  }
+
+  const monto = Math.round(citaCompleta.precioConsulta * 100); // Culqi usa centavos
+
+  Culqi.publicKey = 'pk_test_tZSfjjRyHRzcTn6R'; // Clave sandbox
+  Culqi.settings({
+    title: 'Soluciones Web',
+    currency: 'PEN',
+    description: 'Pago de cita',
+    amount: monto,
+  });
+
+  Culqi.open();
+
+  // ✅ Corrección: evitar error TS usando 'as any'
+  (window as any).culqi = () => {
+    if (Culqi.token) {
+      const token = Culqi.token.id;
+      console.log('Token generado:', token);
+
+      // Registrar la cita en backend
+      this.http.post('http://localhost:8080/api/pacientes/citas', citaCompleta).subscribe({
+        next: () => {
+          this.pagoExitoso = true;
+          this.mostrandoConfirmacion = false;
+          alert('Cita registrada correctamente.');
+          this.router.navigate(['/list']);
+          this.citaStateService.setCitaParaEnvio(null);
+        },
+        error: (err) => {
+          console.error('Error al registrar cita:', err);
+          alert('Error al registrar la cita.');
+        }
+      });
+
+    } else {
+      console.error('Error en el pago:', Culqi.error);
+      alert('Pago no realizado.');
+    }
+  };
+}
+
+mandar() {
+  const citaCompleta = this.citaStateService.getCitaParaEnvioSnapshot();
+
+  if (!citaCompleta) {
+    alert('No hay datos de cita para registrar.');
+    return;
+  }
+
+  this.http.post('http://localhost:8080/api/pacientes/citas', citaCompleta).subscribe({
+    next: () => {
+      this.pagoExitoso = true;
+      alert('✅ Cita registrada correctamente (modo manual).');
+      this.router.navigate(['/list']);
+      this.citaStateService.setCitaParaEnvio(null);
+    },
+    error: (err) => {
+      console.error('Error al registrar cita:', err);
+      alert('❌ Error al registrar la cita.');
     }
   });
 }

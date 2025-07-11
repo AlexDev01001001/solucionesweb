@@ -10,6 +10,6 @@ export class SeguimientoService {
   constructor(private http: HttpClient) {}
 
   getTratamientosConSeguimientos(): Observable<Tratamiento[]> {
-    return this.http.get<Tratamiento[]>(`${this.baseUrl}/detalle`);
+    return this.http.get<Tratamiento[]>(`${this.baseUrl}/detalle`); //sacamos seguimiento y tratamiento
   }
 }

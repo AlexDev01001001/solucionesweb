@@ -2,49 +2,14 @@
   <div class="card p-4 shadow-lg mx-auto" style="max-width: 400px;">
     <h4 class="text-center mb-4">Simulación de Pasarela de Pago</h4>
 
-    <div class="mb-3">
-      <label>Nombre en la tarjeta</label>
-      <input [(ngModel)]="nombre" class="form-control" placeholder="Juan Pérez">
-    </div>
-
-    <div class="mb-3">
-      <label>Número de tarjeta</label>
-      <input [(ngModel)]="numeroTarjeta" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19">
-    </div>
-
-    <div class="mb-3 d-flex justify-content-between">
-      <div style="width: 48%;">
-        <label>Vencimiento</label>
-        <input [(ngModel)]="vencimiento" class="form-control" placeholder="MM/AA">
-      </div>
-      <div style="width: 48%;">
-        <label>CVV</label>
-        <input [(ngModel)]="cvv" class="form-control" placeholder="123" maxlength="3">
-      </div>
-    </div>
-
-    <button class="btn btn-primary w-100" (click)="pagar()">Pagar</button>
+    <button class="btn btn-primary w-100" (click)="confirmarPago()">Pagar S/ {{ citaParaEnvio?.precioConsulta }}</button>
   </div>
-
-  <!-- Modal de confirmación -->
-  <div class="modal" tabindex="-1" style="display: block;" *ngIf="mostrandoConfirmacion">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirmar pago</h5>
-        </div>
-        <div class="modal-body">
-          <p>¿Estás seguro de realizar el pago de <strong></strong>?</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" (click)="cancelarPago()">No</button>
-          <button class="btn btn-success" (click)="confirmarPago()">Sí, pagar</button>
-        </div>
-      </div>
+    <div class="text-center mt-2">
+      <button class="btn btn-outline-secondary btn-sm" (click)="mandar()" style="opacity: 0.3;">
+        Mandar
+      </button>
     </div>
-  </div>
 
-  <!-- Mensaje de éxito -->
   <div class="alert alert-success mt-4 text-center" *ngIf="pagoExitoso">
     ¡Pago simulado exitosamente!
   </div>

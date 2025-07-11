@@ -10,6 +10,6 @@ export class HorarioService {
   constructor(private http: HttpClient) {}
 
   getTodosLosHorarios(): Observable<Horario[]> {
-    return this.http.get<Horario[]>(`${this.baseUrl}/detalle`);
+    return this.http.get<Horario[]>(`${this.baseUrl}/detalle`); //DISPONIBILIDAD Y EL ODONTOLOGO ASIGNADO
   }
 }

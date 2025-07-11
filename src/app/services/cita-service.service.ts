@@ -6,7 +6,7 @@ import { CitaRequest } from '../Models/CitaQuest';
 
 @Injectable({ providedIn: 'root' })
 export class CitaService {
-  private apiUrl = 'http://localhost:8080/api/pacientes';
+  private apiUrl = 'http://localhost:8080/api/pacientes'; //usuarios
   private citaParaEnvio = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) {}
@@ -16,6 +16,6 @@ export class CitaService {
   }
 
   registrarCita(cita: CitaRequest): Observable<any> {
-  return this.http.post('http://localhost:8080/api/pacientes/citas', cita);
+  return this.http.post('http://localhost:8080/api/pacientes/citas', cita);  //post para registro
   }
 }

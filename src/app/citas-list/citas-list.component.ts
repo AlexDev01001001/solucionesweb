@@ -6,7 +6,6 @@ import { CitaService } from '../services/cita-service.service';
 import { UsuarioStateService } from '../services/paciente-usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-citas-list',
