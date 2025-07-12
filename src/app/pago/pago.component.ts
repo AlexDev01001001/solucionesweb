@@ -34,8 +34,6 @@ export class PagoComponent implements OnInit{
         this.cita=cita;
        this.citaParaEnvio = this.citaStateService.getCitaParaEnvioSnapshot();
     console.log('Precio obtenido:', this.citaParaEnvio?.precioConsulta);  // <- De
-
-
       })
   }
 
@@ -57,46 +55,22 @@ export class PagoComponent implements OnInit{
         }
     }
 
-  /*confirmarPago() {
-  const citaCompleta = this.citaStateService.getCitaParaEnvioSnapshot();
-
-  if (!citaCompleta) {
-    alert('No hay datos de cita para registrar.');
-    return;
-  }
-
-  console.log('Registrando cita con DTO:', citaCompleta);
-
-  this.http.post('http://localhost:8080/api/pacientes/citas', citaCompleta).subscribe({
-    next: () => {
-      this.pagoExitoso = true;
-      this.mostrandoConfirmacion = false;
-      alert('Cita registrada correctamente.');
-      this.router.navigate(['/list']);
-      this.citaStateService.setCitaParaEnvio(null); // limpia los datos
-    },
-    error: (err) => {
-      console.error('Error al registrar cita:', err);
-      alert('Error al registrar la cita.');
-    }
-  });
-}*/
   confirmarPago() {
-  const citaCompleta = this.citaStateService.getCitaParaEnvioSnapshot();
+    const citaCompleta = this.citaStateService.getCitaParaEnvioSnapshot();
 
-  if (!citaCompleta) {
-    alert('No hay datos de cita para registrar.');
-    return;
-  }
+    if (!citaCompleta) {
+      alert('No hay datos de cita para registrar.');
+      return;
+    }
 
-  const monto = Math.round(citaCompleta.precioConsulta * 100); // Culqi usa centavos
+    const monto = Math.round(citaCompleta.precioConsulta * 100); // Culqi usa centavos
 
-  Culqi.publicKey = 'pk_test_tZSfjjRyHRzcTn6R'; // Clave sandbox
-  Culqi.settings({
-    title: 'Soluciones Web',
-    currency: 'PEN',
-    description: 'Pago de cita',
-    amount: monto,
+    Culqi.publicKey = 'pk_test_tZSfjjRyHRzcTn6R'; // Clave sandbox
+    Culqi.settings({
+      title: 'Soluciones Web',
+      currency: 'PEN',
+      description: 'Pago de cita',
+      amount: monto,
   });
 
   Culqi.open();

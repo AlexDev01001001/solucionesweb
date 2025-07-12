@@ -1,0 +1,35 @@
+.doctor-dashboard h2 {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.doctor-dashboard .card-title {
+  font-size: 1.1rem;
+}
+
+.doctor-dashboard .table th,
+.doctor-dashboard .table td {
+  vertical-align: middle;
+}
+
+.doctor-dashboard .btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* Fondo general */
+:host {
+  display: block;
+  min-height: 100vh;
+  background-image: url('/fondo2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 🎯 Sombra elegante para el contenedor principal */
+.doctor-dashboard .card {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra visible */
+  background-color: rgba(255, 255, 255, 0.95); /* Opcional: fondo blanco semitransparente para contraste */
+  border-radius: 12px; /* Opcional: bordes más suaves */
+}

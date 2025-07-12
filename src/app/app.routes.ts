@@ -7,6 +7,7 @@ import { RegistroFillComponent } from './registro/registro-fill/registro-fill.co
 import { CitasListComponent } from './citas-list/citas-list.component';
 import { PagoComponent } from './pago/pago.component';
 import { VistaAdminComponent } from './vista-doctores/sidebarncontainer/sidebarncontainer.component';
+import { VistadedoctoresComponent } from './nuevo/vistadedoctores/vistadedoctores.component';
 export const routes: Routes = [
     {path:'',redirectTo:'/home',pathMatch:'full'},
     {path:'home',component:RedireccionamientosComponent},
@@ -16,7 +17,8 @@ export const routes: Routes = [
     {path:'registro', component:RegistroFillComponent},
     {path:'list',component:CitasListComponent},
     {path:'pay',component:PagoComponent},
-    {path:'doctoresview',component:VistaAdminComponent}
+    {path:'doctoresview',component:VistaAdminComponent},
+    {path:'vistadedoctor',component:VistadedoctoresComponent}
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);
